@@ -1,6 +1,7 @@
 #![allow(unused)]
 use anyhow::Result;
 use reqwest::{Client, Response};
+use serde::Serialize;
 use serde::de::DeserializeOwned;
 use serde_json::Value;
 use std::collections::HashMap;
@@ -10,7 +11,7 @@ pub mod fixtures;
 pub mod manager;
 pub mod player;
 
-struct FplApiClient {
+pub struct FplApiClient {
     pub(crate) client: Client,
     pub(crate) base_url: String,
 }
@@ -35,17 +36,17 @@ impl FplApiClient {
         Ok(FplApiClient { client, base_url })
     }
 
-    pub(crate) async fn get<T: DeserializeOwned>(
-        &self,
-        endpoint: impl Into<String>,
-        params: Option<HashMap<String, String>>,
-    ) -> Result<T> {
+    pub(crate) async fn get<T, Q>(&self, endpoint: impl Into<String>, query: Option<Q>) -> Result<T>
+    where
+        T: DeserializeOwned,
+        Q: Serialize,
+    {
         let url = format!("{}/{}", self.base_url, endpoint.into());
 
         let mut request = self.client.get(url);
 
-        if let Some(params) = params {
-            request = request.query(&params);
+        if let Some(query) = query {
+            request = request.query(&query);
         }
 
         let response: Response = request.send().await?;

@@ -1,5 +1,4 @@
 #![allow(unused)]
-
 use anyhow::Result;
 use reqwest::{Client, Response};
 use serde::de::DeserializeOwned;
@@ -7,9 +6,13 @@ use serde_json::Value;
 use std::collections::HashMap;
 use std::time::Duration;
 
+pub mod fixtures;
+pub mod manager;
+pub mod player;
+
 struct FplApiClient {
-    client: Client,
-    base_url: String,
+    pub(crate) client: Client,
+    pub(crate) base_url: String,
 }
 
 impl FplApiClient {
@@ -32,7 +35,7 @@ impl FplApiClient {
         Ok(FplApiClient { client, base_url })
     }
 
-    async fn get<T: DeserializeOwned>(
+    pub(crate) async fn get<T: DeserializeOwned>(
         &self,
         endpoint: impl Into<String>,
         params: Option<HashMap<String, String>>,

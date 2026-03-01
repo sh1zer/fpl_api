@@ -7,7 +7,7 @@ pub struct BootstrapStatic {
     pub phases: Vec<Phase>,
     pub teams: Vec<Team>,
     pub total_players: i32,
-    pub elements: Vec<Player>,
+    pub elements: Vec<Element>,
     pub element_stats: Vec<ElementStat>,
     pub element_types: Vec<ElementType>,
     pub chips: Vec<Chip>,
@@ -84,7 +84,7 @@ pub struct Team {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-pub struct Player {
+pub struct Element {
     pub chance_of_playing_next_round: Option<i32>,
     pub chance_of_playing_this_round: Option<i32>,
     pub code: i32,

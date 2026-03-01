@@ -4,8 +4,20 @@ use anyhow::Result;
 use std::collections::HashMap;
 
 impl FplApiClient {
-    pub async fn get_fixtures(&self, gameweek: i32) -> Result<Vec<Fixture>> {
-        let response: Vec<Fixture> = self.get("fixtures", Some([("event", gameweek)])).await?;
+    pub async fn get_fixtures(
+        &self,
+        gameweek: Option<i32>,
+        team: Option<i32>,
+    ) -> Result<Vec<Fixture>> {
+        let mut query = vec![];
+        if let Some(gw) = gameweek {
+            query.push(("event", gw));
+        }
+        if let Some(id) = team {
+            query.push(("team", id));
+        }
+
+        let response: Vec<Fixture> = self.get("fixtures", Some(query)).await?;
 
         Ok(response)
     }

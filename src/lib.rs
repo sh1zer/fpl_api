@@ -1,14 +1,16 @@
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
-}
+pub mod models;
+
+pub use models::bootstrap_static::BootstrapStatic;
+pub use models::fixture::Fixture;
+pub use models::league::LeagueStandings;
+pub use models::live::LiveEvent;
+pub use models::manager::Manager;
+pub use models::picks::ManagerPicks;
 
 #[cfg(test)]
 mod tests {
-    use super::*;
-
     #[test]
     fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+        assert_eq!(2 + 2, 4);
     }
 }

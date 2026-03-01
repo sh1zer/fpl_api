@@ -56,4 +56,10 @@ impl FplApiClient {
 
         Ok(response.json::<T>().await?)
     }
+    pub(crate) async fn gets<T>(&self, endpoint: &str) -> Result<T>
+    where
+        T: DeserializeOwned,
+    {
+        self.get(endpoint, None::<()>).await
+    }
 }

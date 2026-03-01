@@ -17,8 +17,8 @@ impl FplApiClient {
             query.push(("team", id));
         }
 
-        let response: Vec<Fixture> = self.get("fixtures", Some(query)).await?;
+        let fixtures: Vec<Fixture> = self.get("fixtures", Some(query)).await?;
 
-        Ok(response)
+        Ok(fixtures)
     }
 }

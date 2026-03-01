@@ -10,6 +10,6 @@ pub struct EventStatus {
 pub struct StatusEntry {
     pub bonus_added: bool,
     pub date: String,
-    pub event: u32,
+    pub event: i32,
     pub points: String,
 }

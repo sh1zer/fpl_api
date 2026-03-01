@@ -8,7 +8,7 @@ pub struct SetPieceNotes {
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct SetPieceTeam {
-    pub id: u32,
+    pub id: i32,
     pub notes: Vec<SetPieceNote>,
 }
 

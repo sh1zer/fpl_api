@@ -13,5 +13,5 @@ pub struct ElementSummary {
 pub struct SeasonHistory {
     pub season_name: String,
     pub total_points: i32,
-    pub rank: u32,
+    pub rank: i32,
 }

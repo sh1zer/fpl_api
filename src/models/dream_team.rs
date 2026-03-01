@@ -8,13 +8,13 @@ pub struct DreamTeam {
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct TopPlayer {
-    pub id: u32,
-    pub points: u32,
+    pub id: i32,
+    pub points: i32,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct DreamTeamPlayer {
-    pub element: u32,
-    pub points: u32,
-    pub position: u32,
+    pub element: i32,
+    pub points: i32,
+    pub position: i32,
 }

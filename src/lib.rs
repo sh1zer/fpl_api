@@ -1,3 +1,4 @@
+pub mod client;
 pub mod models;
 
 pub use models::bootstrap_static::BootstrapStatic;

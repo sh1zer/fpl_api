@@ -7,9 +7,14 @@ use serde_json::Value;
 use std::collections::HashMap;
 use std::time::Duration;
 
+pub mod bootstrap_static;
+pub mod dream_team;
 pub mod fixtures;
+pub mod league;
+pub mod live;
 pub mod manager;
 pub mod player;
+pub mod set_piece;
 
 pub struct FplApiClient {
     pub(crate) client: Client,

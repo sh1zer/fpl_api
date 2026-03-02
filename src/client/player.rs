@@ -5,6 +5,7 @@ use crate::models::fixture::Fixture;
 use crate::{BootstrapStatic, Manager};
 use anyhow::{Result, anyhow};
 use std::collections::HashMap;
+use std::collections::HashSet;
 
 impl FplApiClient {
     /// returns upcoming as well as previous fixtures in the season
@@ -18,22 +19,24 @@ impl FplApiClient {
         Ok(summary)
     }
 
-    /// retrieves a singular players info, not recommended to call in loops as each one makes an
+    /// retrieves info for a set of players (iterator of element_ids), not recommended to call in loops as each one makes an
     /// api call and then has to iterate through the entire 1000 element array of player data
     ///
     /// if possible store the all the bootstrap_static data somewhere locally to avoid excessive calls of this
     /// endpoint
-    pub async fn get_element_info(&self, element_id: i32) -> Result<Element> {
-        let all: BootstrapStatic = self
-            .gets(format!("element-summary/{}/", element_id).as_str())
-            .await?;
-        let element: Element = match all.elements.into_iter().find(|e| e.id == element_id) {
-            Some(element) => element,
-            _ => {
-                return Err(anyhow!("Couldnt find player with given element_id"));
-            }
-        };
+    pub async fn get_element_info<I>(&self, element_ids: I) -> Result<Vec<Element>>
+    where
+        I: IntoIterator<Item = i32>,
+    {
+        let all: BootstrapStatic = self.gets("bootstrap_static").await?;
+        let id_set: HashSet<i32> = element_ids.into_iter().collect();
 
-        Ok(element)
+        let elements: Vec<Element> = all
+            .elements
+            .into_iter()
+            .filter(|e| id_set.contains(&e.id))
+            .collect();
+
+        Ok(elements)
     }
 }

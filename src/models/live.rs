@@ -2,11 +2,11 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct LiveEvent {
-    pub elements: Vec<LivePlayerStat>,
+    pub elements: Vec<LiveElementStat>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-pub struct LivePlayerStat {
+pub struct LiveElementStat {
     pub id: i32,
     pub stats: LiveStats,
     pub explain: Vec<PointsExplanation>,

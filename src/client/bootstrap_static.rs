@@ -1,16 +1,13 @@
-use crate::client::{FplApiClient, bootstrap_static};
+use crate::client::FplApiClient;
 use crate::models::bootstrap_static::{Element, Event, Team};
-use crate::models::element_summary::ElementSummary;
-use crate::models::fixture::Fixture;
-use crate::{BootstrapStatic, Manager};
-use anyhow::{Result, anyhow};
-use std::collections::HashMap;
+use crate::{BootstrapStatic};
+use anyhow::Result;
 use std::collections::HashSet;
 
 impl FplApiClient {
     /// returns the BootstrapStatic struct, containing all static data such as individual player and team data
     pub async fn get_bootstrap(&self) -> Result<BootstrapStatic> {
-        let all: BootstrapStatic = self.gets("bootstrap_static").await?;
+        let all: BootstrapStatic = self.gets("bootstrap-static/").await?;
 
         Ok(all)
     }

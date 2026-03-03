@@ -71,7 +71,7 @@ pub struct Team {
     pub position: i32,
     pub short_name: String,
     pub strength: i32,
-    pub team_division: Option<serde_json::Value>,
+    pub team_division: Option<String>,
     pub unavailable: bool,
     pub win: i32,
     pub strength_overall_home: i32,
@@ -173,7 +173,7 @@ pub struct Element {
     pub points_per_game_rank_type: i32,
     pub selected_rank: i32,
     pub selected_rank_type: i32,
-    pub birth_date: String,
+    pub birth_date: Option<String>,
     pub region: Option<i32>,
     pub team_join_date: Option<String>,
     pub known_name: Option<String>,
@@ -185,9 +185,17 @@ pub struct Element {
     pub tackles: i32,
     pub recoveries: i32,
     pub clearances_blocks_interceptions: i32,
-    pub defensive_contribution: String,
+    pub defensive_contribution: i32,
     pub defensive_contribution_per_90: f32,
-    pub scout_risks: Vec<serde_json::Value>,
+    pub scout_risks: Vec<ScoutRisk>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct ScoutRisk {
+    pub property: String,
+    pub notes: String,
+    pub gameweek: Option<i32>,
+    pub url: Option<String>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -226,7 +234,7 @@ pub struct GameSettings {
     pub transfers_sell_on_fee: f32,
     pub max_extra_free_transfers: i32,
     pub league_h2h_tiebreak_stats: Vec<String>,
-    pub timezone: String,
+    pub timezone: Option<String>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -274,12 +282,63 @@ pub struct Chip {
 #[derive(Debug, Serialize, Deserialize)]
 pub struct GameConfig {
     pub settings: GameConfigSettings,
-    pub rules: serde_json::Value,
-    pub scoring: serde_json::Value,
+    pub rules: GameSettings,
+    pub scoring: ScoringRules,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct GameConfigSettings {
     pub entry_per_event: bool,
     pub timezone: String,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct PositionScore {
+    #[serde(rename = "DEF")]
+    pub def: i32,
+    #[serde(rename = "FWD")]
+    pub fwd: i32,
+    #[serde(rename = "GKP")]
+    pub gkp: i32,
+    #[serde(rename = "MID")]
+    pub mid: i32,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct ScoringRules {
+    pub long_play: i32,
+    pub short_play: i32,
+    pub goals_conceded: PositionScore,
+    pub saves: i32,
+    pub goals_scored: PositionScore,
+    pub assists: i32,
+    pub clean_sheets: PositionScore,
+    pub penalties_saved: i32,
+    pub penalties_missed: i32,
+    pub yellow_cards: i32,
+    pub red_cards: i32,
+    pub own_goals: i32,
+    pub bonus: i32,
+    pub bps: i32,
+    pub influence: i32,
+    pub creativity: i32,
+    pub threat: i32,
+    pub ict_index: i32,
+    pub special_multiplier: i32,
+    pub tackles: i32,
+    pub clearances_blocks_interceptions: i32,
+    pub recoveries: i32,
+    pub defensive_contribution: PositionScore,
+    pub starts: i32,
+    pub mng_goals_scored: PositionScore,
+    pub mng_clean_sheets: PositionScore,
+    pub mng_win: PositionScore,
+    pub mng_draw: PositionScore,
+    pub mng_loss: i32,
+    pub mng_underdog_win: PositionScore,
+    pub mng_underdog_draw: PositionScore,
+    pub expected_assists: i32,
+    pub expected_goal_involvements: i32,
+    pub expected_goals_conceded: i32,
+    pub expected_goals: i32,
 }

@@ -14,6 +14,7 @@ pub struct SetPieceTeam {
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct SetPieceNote {
-    pub info: String,
-    pub source: String,
+    pub external_link: bool,
+    pub info_message: String,
+    pub source_link: String,
 }

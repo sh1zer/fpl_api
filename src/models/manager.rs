@@ -25,7 +25,7 @@ pub struct Manager {
     pub last_deadline_value: Option<i32>,
     pub last_deadline_total_transfers: Option<i32>,
     pub entered_events: Vec<i32>,
-    pub years_active: Vec<i32>,
+    pub years_active: i32,
     pub club_badge_src: Option<String>,
 }
 
@@ -87,8 +87,12 @@ pub struct CupMatch {
     pub entry_2_draw: i32,
     pub entry_2_loss: i32,
     pub entry_2_total: i32,
+    pub is_knockout: bool,
     pub is_bye: bool,
-    pub knockout_type: String,
-    pub event: i32,
+    pub league: i32,
     pub winner: i32,
+    pub seed_value: Option<i32>,
+    pub tiebreak: Option<String>,
+    pub event: i32,
+    pub knockout_name: Option<String>,
 }

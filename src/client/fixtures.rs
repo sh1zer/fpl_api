@@ -4,6 +4,8 @@ use anyhow::Result;
 use std::collections::HashMap;
 
 impl FplApiClient {
+    /// gets fixtures for either the whole season,
+    /// allows for filtering by team and gameweek
     pub async fn get_fixtures(
         &self,
         gameweek: Option<i32>,

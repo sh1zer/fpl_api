@@ -1,6 +1,6 @@
 use crate::client::FplApiClient;
 use crate::models::fixture::Fixture;
-use crate::{Manager, ManagerPicks};
+use crate::{Manager, ManagerHistory, ManagerPicks};
 use anyhow::Result;
 use std::collections::HashMap;
 
@@ -10,6 +10,13 @@ impl FplApiClient {
         let manager: Manager = self.gets(format!("entry/{}", manager_id).as_str()).await?;
 
         Ok(manager)
+    }
+
+    pub async fn get_manager_history(&self, manager_id: i32) -> Result<ManagerHistory> {
+        let history: ManagerHistory = self
+            .gets(format!("entry/{}/history", manager_id).as_str())
+            .await?;
+        Ok(history)
     }
 
     /// gets picks for a given manager on a given gameweek

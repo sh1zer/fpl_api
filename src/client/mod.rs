@@ -15,6 +15,7 @@ pub mod live;
 pub mod manager;
 pub mod player;
 pub mod set_piece;
+pub mod status;
 
 /// the client for all things request related, always go through this for anything
 pub struct FplApiClient {

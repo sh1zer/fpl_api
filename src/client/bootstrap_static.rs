@@ -1,5 +1,5 @@
 use crate::client::{FplApiClient, bootstrap_static};
-use crate::models::bootstrap_static::{Element, Team};
+use crate::models::bootstrap_static::{Element, Event, Team};
 use crate::models::element_summary::ElementSummary;
 use crate::models::fixture::Fixture;
 use crate::{BootstrapStatic, Manager};
@@ -13,6 +13,11 @@ impl FplApiClient {
         let all: BootstrapStatic = self.gets("bootstrap_static").await?;
 
         Ok(all)
+    }
+
+    pub async fn get_events(&self) -> Result<Vec<Event>> {
+        let events: Vec<Event> = self.gets("events/").await?;
+        Ok(events)
     }
 
     /// retrieves info for a set of teams (iterator of team_ids), not recommended to call in loops as each one makes an

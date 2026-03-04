@@ -11,7 +11,8 @@ impl FplApiClient {
             .await
     }
 
-    /// fetches any range of pages from league standings, every page is 50 entries
+    /// fetches any range of pages from league standings, every page is 50 entries and they are
+    /// 1-indexed
     pub async fn get_league_standings_pages(
         &self,
         league_id: i32,
@@ -29,7 +30,7 @@ impl FplApiClient {
             return Ok(base);
         }
 
-        for page_id in pages_start + 1..pages_end {
+        for page_id in pages_start + 1..pages_end + 1 {
             let page: LeagueStandings = self
                 .get(
                     format!("leagues-classic/{}/standings", league_id).as_str(),

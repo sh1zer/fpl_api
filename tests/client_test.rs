@@ -56,10 +56,7 @@ async fn test_get_bootstrap() {
 async fn test_get_events() {
     let client = FplApiClient::new().expect("Failed to create client");
 
-    let events = client
-        .get_events()
-        .await
-        .expect("Failed to fetch events");
+    let events = client.get_events().await.expect("Failed to fetch events");
 
     assert!(!events.is_empty());
 }
@@ -156,6 +153,18 @@ async fn test_get_league_standings() {
         .get_league_standings(LEAGUE_ID)
         .await
         .expect("Failed to fetch league standings");
+
+    assert!(!standings.standings.results.is_empty());
+}
+
+#[tokio::test]
+async fn test_get_league_standings_pages() {
+    let client = FplApiClient::new().expect("Failed to create client");
+
+    let standings = client
+        .get_league_standings_pages(LEAGUE_ID, 1, 2)
+        .await
+        .expect("Failed to fetch league standings pages");
 
     assert!(!standings.standings.results.is_empty());
 }

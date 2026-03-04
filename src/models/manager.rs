@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+use serde_json::Value;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Manager {
@@ -33,8 +34,16 @@ pub struct Manager {
 pub struct Leagues {
     pub classic: Vec<LeagueEntry>,
     pub h2h: Vec<LeagueEntry>,
-    pub cup: CupStatus,
+    pub cup: Cup,
     pub cup_matches: Vec<CupMatch>,
+    pub event: Vec<Value>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct Cup {
+    pub matches: Vec<CupMatch>,
+    pub status: CupStatus,
+    pub cup_league: Option<i32>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -90,7 +99,7 @@ pub struct CupMatch {
     pub is_knockout: bool,
     pub is_bye: bool,
     pub league: i32,
-    pub winner: i32,
+    pub winner: Option<i32>,
     pub seed_value: Option<i32>,
     pub tiebreak: Option<String>,
     pub event: i32,

@@ -1,4 +1,4 @@
-use fpl_api::client::FplApiClient;
+use fpl_client::client::FplApiClient;
 
 const MANAGER_ID: i32 = 5593884;
 const EVENT_ID: i32 = 1;

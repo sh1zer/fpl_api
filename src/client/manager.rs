@@ -1,8 +1,6 @@
 use crate::client::FplApiClient;
-use crate::models::fixture::Fixture;
 use crate::{Manager, ManagerHistory, ManagerPicks};
 use anyhow::Result;
-use std::collections::HashMap;
 
 impl FplApiClient {
     /// gets data for a given manager

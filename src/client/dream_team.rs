@@ -1,6 +1,5 @@
 use crate::client::FplApiClient;
 use crate::models::dream_team::DreamTeam;
-use crate::models::fixture::Fixture;
 use anyhow::Result;
 
 impl FplApiClient {

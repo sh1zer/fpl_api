@@ -1,6 +1,6 @@
+use crate::BootstrapStatic;
 use crate::client::FplApiClient;
-use crate::models::bootstrap_static::{Element, Event, Team};
-use crate::{BootstrapStatic};
+use crate::models::bootstrap_static::{Event, Team};
 use anyhow::Result;
 use std::collections::HashSet;
 

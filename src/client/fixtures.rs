@@ -1,7 +1,6 @@
 use crate::client::FplApiClient;
 use crate::models::fixture::Fixture;
 use anyhow::Result;
-use std::collections::HashMap;
 
 impl FplApiClient {
     /// gets fixtures for either the whole season,

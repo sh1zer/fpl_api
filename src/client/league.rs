@@ -1,8 +1,6 @@
 use crate::LeagueStandings;
 use crate::client::FplApiClient;
-use crate::models::fixture::Fixture;
 use anyhow::Result;
-use std::collections::HashMap;
 
 impl FplApiClient {
     /// fetches the first page of a league standings (50 entries)

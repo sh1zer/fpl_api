@@ -1,9 +1,7 @@
+use crate::LiveEvent;
 use crate::client::FplApiClient;
-use crate::models::fixture::Fixture;
 use crate::models::live::LiveElementStat;
-use crate::{LiveEvent, Manager, ManagerPicks};
 use anyhow::Result;
-use std::collections::HashMap;
 use std::collections::HashSet;
 
 impl FplApiClient {

@@ -1,10 +1,8 @@
+use crate::BootstrapStatic;
 use crate::client::FplApiClient;
 use crate::models::bootstrap_static::Element;
 use crate::models::element_summary::ElementSummary;
-use crate::models::fixture::Fixture;
-use crate::{BootstrapStatic, Manager};
-use anyhow::{Result, anyhow};
-use std::collections::HashMap;
+use anyhow::Result;
 use std::collections::HashSet;
 
 impl FplApiClient {

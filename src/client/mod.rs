@@ -1,10 +1,7 @@
-#![allow(unused)]
 use anyhow::Result;
 use reqwest::{Client, Response};
 use serde::Serialize;
 use serde::de::DeserializeOwned;
-use serde_json::Value;
-use std::collections::HashMap;
 use std::time::Duration;
 
 pub mod bootstrap_static;

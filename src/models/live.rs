@@ -1,10 +1,12 @@
 use serde::{Deserialize, Serialize};
 
+/// Live stats for all elements (football players) in a gameweek (event)
 #[derive(Debug, Serialize, Deserialize)]
 pub struct LiveEvent {
     pub elements: Vec<LiveElementStat>,
 }
 
+/// Live stats and points breakdown for a single element (football player) in a gameweek
 #[derive(Debug, Serialize, Deserialize)]
 pub struct LiveElementStat {
     pub id: i32,
@@ -13,6 +15,7 @@ pub struct LiveElementStat {
     pub modified: bool,
 }
 
+/// Real-time in-gameweek stats for a football player
 #[derive(Debug, Serialize, Deserialize)]
 pub struct LiveStats {
     pub minutes: i32,
@@ -41,12 +44,14 @@ pub struct LiveStats {
     pub in_dreamteam: bool,
 }
 
+/// A breakdown of points earned by a player in a specific fixture
 #[derive(Debug, Serialize, Deserialize)]
 pub struct PointsExplanation {
     pub fixture: i32,
     pub stats: Vec<ExplanationStat>,
 }
 
+/// A single stat's contribution to a player's points tally in a fixture
 #[derive(Debug, Serialize, Deserialize)]
 pub struct ExplanationStat {
     pub identifier: String,

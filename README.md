@@ -5,6 +5,7 @@ This project is a simple wrapper for the official Fantasy Premier League api wit
 Not very in-depth, made this mostly for personal use so will probably add more functions as i need
 
 ## DESERIALIZATION COULD BE BROKEN I HAVE NOT FOUND A WAY TO VERIFY HOW EXACTLY THE API RETURNS DATA SO THE MODELS COULD BE WRONG
+All structs are documented to the best of my knowledge, which means there could be mistakes, so be wary
 
 
 ## basic usage:

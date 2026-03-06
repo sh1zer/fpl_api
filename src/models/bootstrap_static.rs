@@ -1,5 +1,6 @@
 use serde::{Deserialize, Serialize};
 
+/// Top-level response from the bootstrap-static endpoint Contains all global game data
 #[derive(Debug, Serialize, Deserialize)]
 pub struct BootstrapStatic {
     pub events: Vec<Event>,
@@ -14,6 +15,7 @@ pub struct BootstrapStatic {
     pub game_config: Option<GameConfig>,
 }
 
+/// A gameweek (also called an "event") in the FPL season
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Event {
     pub id: i32,
@@ -46,18 +48,21 @@ pub struct Event {
     pub most_vice_captained: Option<i32>,
 }
 
+/// How many times a chip was played in a given gameweek
 #[derive(Debug, Serialize, Deserialize)]
 pub struct ChipPlay {
     pub chip_name: String,
     pub num_played: i32,
 }
 
+/// The top scoring element (football player) and their points for a gameweek
 #[derive(Debug, Serialize, Deserialize)]
 pub struct TopElementInfo {
     pub id: i32,
     pub points: i32,
 }
 
+/// A Premier League team and its FPL-related stats
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Team {
     pub code: i32,
@@ -83,6 +88,7 @@ pub struct Team {
     pub pulse_id: i32,
 }
 
+/// A football player (referred to as "element" in the FPL API)
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Element {
     pub chance_of_playing_next_round: Option<i32>,
@@ -93,6 +99,7 @@ pub struct Element {
     pub cost_change_start: i32,
     pub cost_change_start_fall: i32,
     pub dreamteam_count: i32,
+    /// Position type ID (1=GKP, 2=DEF, 3=MID, 4=FWD)
     pub element_type: i32,
     pub ep_next: String,
     pub ep_this: String,
@@ -103,6 +110,7 @@ pub struct Element {
     pub in_dreamteam: bool,
     pub news: String,
     pub news_added: Option<String>,
+    /// Current price in tenths of millions (eg. 65 = £6.5m)
     pub now_cost: i32,
     pub photo: String,
     pub points_per_game: String,
@@ -190,6 +198,7 @@ pub struct Element {
     pub scout_risks: Vec<ScoutRisk>,
 }
 
+/// An injury or availability risk note for a football player
 #[derive(Debug, Serialize, Deserialize)]
 pub struct ScoutRisk {
     pub property: String,
@@ -198,6 +207,7 @@ pub struct ScoutRisk {
     pub url: Option<String>,
 }
 
+/// Global game rules and configuration limits
 #[derive(Debug, Serialize, Deserialize)]
 pub struct GameSettings {
     pub league_join_private_max: i32,
@@ -237,6 +247,7 @@ pub struct GameSettings {
     pub timezone: Option<String>,
 }
 
+/// A named phase of the season (eg. "Overall", "Month 1"), spanning a range of gameweeks.
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Phase {
     pub id: i32,
@@ -246,12 +257,14 @@ pub struct Phase {
     pub highest_score: Option<i32>,
 }
 
+/// Metadata for a single element (football player) stat, such as "Goals Scored"
 #[derive(Debug, Serialize, Deserialize)]
 pub struct ElementStat {
     pub label: String,
     pub name: String,
 }
 
+/// A position type (GKP, DEF, MID, FWD) and its squad selection rules
 #[derive(Debug, Serialize, Deserialize)]
 pub struct ElementType {
     pub id: i32,
@@ -269,6 +282,7 @@ pub struct ElementType {
     pub element_count: i32,
 }
 
+/// An FPL chip (eg. Wildcard, Triple Captain) and the gameweeks it is available in
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Chip {
     pub id: i32,
@@ -279,6 +293,7 @@ pub struct Chip {
     pub chip_type: String,
 }
 
+/// Combined game configuration including settings, rules and scoring
 #[derive(Debug, Serialize, Deserialize)]
 pub struct GameConfig {
     pub settings: GameConfigSettings,
@@ -286,12 +301,14 @@ pub struct GameConfig {
     pub scoring: ScoringRules,
 }
 
+/// Basic game configuration settings such as timezone
 #[derive(Debug, Serialize, Deserialize)]
 pub struct GameConfigSettings {
     pub entry_per_event: bool,
     pub timezone: String,
 }
 
+/// Points awarded per position for a stat category
 #[derive(Debug, Serialize, Deserialize)]
 pub struct PositionScore {
     #[serde(rename = "DEF")]
@@ -304,6 +321,7 @@ pub struct PositionScore {
     pub mid: i32,
 }
 
+/// The full FPL points scoring rules for all stats and positions
 #[derive(Debug, Serialize, Deserialize)]
 pub struct ScoringRules {
     pub long_play: i32,

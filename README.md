@@ -1,26 +1,50 @@
-# Fantast Premier League API
+# Fantasy Premier League API Wrapper (`fpl_client`)
+A lightweight, asynchronous Rust wrapper for the official Fantasy Premier League API. This library provides deserialized structs and a simplified interface to easily interact with FPL data in Rust applications.
 
-This project is a simple wrapper for the official Fantasy Premier League api with deserialized structs and a simpler interface.
+## Features
+- **Asynchronous**: Built with `async`/`await` for efficient, non-blocking HTTP requests.
+- **Strongly Typed**: Provides deserialized Rust structs for FPL data models.
+- **Simple Interface**: Easy-to-use client for fetching league standings, player data, and more.
 
-Not very in-depth, made this mostly for personal use so will probably add more functions as i need
+## Disclaimer
+> **Note:** The official FPL API is undocumented, meaning the exact data structures and responses can change or have unexpected edge cases. While the structs in this library are documented to the best of my knowledge, deserialization errors may occasionally occur. Be cautious!
 
-## DESERIALIZATION COULD BE BROKEN I HAVE NOT FOUND A WAY TO VERIFY HOW EXACTLY THE API RETURNS DATA SO THE MODELS COULD BE WRONG
-All structs are documented to the best of my knowledge, which means there could be mistakes, so be wary
+## Installation
+Add this to your `Cargo.toml`:
+```toml
+[dependencies]
+fpl_client = "0.1.1"
+```
+or run
+```bash
+cargo add fpl_client
+```
 
-
-## basic usage:
+## Usage
+Here is a basic example of how to use the client to fetch league standings:
 
 ```rust
-async fn test_get_league_standings() {
-    // create a client
-    let client = FplApiClient::new().expect("Failed to create client");
+use fpl_client::client::FplApiClient;
+use fpl_client::LeagueStandings;
 
-    // call an endpoint
-    let standings = client
-        .get_league_standings(LEAGUE_ID)
-        .await
-        .expect("Failed to fetch league standings");
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    // 1. Create a new API client
+    let client: FplApiClient = FplApiClient::new()?;
+
+    // 2. Define the league ID you want to fetch
+    let league_id: i32 = 123456; 
+
+    // 3. Fetch the standings with explicit type annotation
+    let standings: LeagueStandings = client
+        .get_league_standings(league_id)
+        .await?;
+
+    println!("Fetched standings successfully! League Name: {}", standings.league.name);
+
+    Ok(())
+}
 ```
-```
-```
-```
+
+## Documentation
+Can be found at https://docs.rs/fpl_client/0.1.1/fpl_client/
